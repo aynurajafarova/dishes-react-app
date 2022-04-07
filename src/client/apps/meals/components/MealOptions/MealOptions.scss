@@ -4,13 +4,14 @@
   &__item {
     cursor: pointer;
     position: relative;
-    margin-left: 15px;
+    width: 200px;
     input[type="radio"] {
       opacity: 0; /* hidden but still tabable */
       position: absolute;
     }
     input[type="radio"] + div {
-      border-radius: 8px;
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
       padding: 8px;
       transition: ease 0.4s;
       -webkit-transition: ease 0.4s;
@@ -18,13 +19,17 @@
     }
     input[type="radio"]:checked + div {
       background-color: $lightGray;
-      border: 1px solid $lightGreen;
+      border-bottom: 2px solid $lightGreen;
       box-shadow: 0 4px 40px 0 rgb(118 188 33 / 40%);
+      span {
+        color: $midDark;
+      }
     }
     &__body {
       span {
         margin-right: 8px;
         display: flex;
+        color: $midGray;
       }
     }
   }

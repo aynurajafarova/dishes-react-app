@@ -9,7 +9,7 @@ const OrderMealPage: FC = () => {
   return (
     <main>
       <Container>
-        <Header className="center" title="Are you hungry?" />
+        <Header className="center" title="Food order form" />
         <OrderMealForm />
         <MealOptions />
       </Container>
