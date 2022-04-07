@@ -6,11 +6,10 @@ import "./MealOptions.scss";
 
 interface IProps {
   mealOptions: IMealOption[];
-  findMeal: (id: string) => void;
   setMealId: (id: string) => void;
 }
 
-const MealOptions: FC<IProps> = ({ mealOptions, findMeal, setMealId }) => {
+const MealOptions: FC<IProps> = ({ mealOptions, setMealId }) => {
   return (
     <>
       <div className="meal-types center">
@@ -21,7 +20,6 @@ const MealOptions: FC<IProps> = ({ mealOptions, findMeal, setMealId }) => {
                 {...{ type, name, id, defaultChecked }}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   setMealId(e.target.id);
-                  findMeal(e.target.id);
                 }}
               />
               <div className="meal-types__item__body center">

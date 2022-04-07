@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import OrderMealForm from "../components/OrderMealForm/OrderMealForm";
 import MealOptions from "../components/MealOptions/MealOptions";
@@ -10,7 +10,7 @@ import { IMealOption } from "../../../shared/models/meal";
 const OrderMealPage: FC = () => {
   const [mealId, setMealId] = useState<string>(mealOptions[0]?.id);
 
-  const findMeal = (mealId: string) => {
+  const getSingleMeal = (mealId: string) => {
     const newArr: IMealOption[] = mealOptions.filter(
       (item: IMealOption) => item.id === mealId
     );
@@ -19,12 +19,16 @@ const OrderMealPage: FC = () => {
 
   console.log(mealId);
 
+  useEffect(() => {
+    getSingleMeal(mealId);
+  }, [mealId]);
+
   return (
     <main>
       <Container>
         <Header className="center" title="Food order form" />
         <OrderMealForm />
-        <MealOptions {...{ mealOptions, findMeal, setMealId }} />
+        <MealOptions {...{ mealOptions, setMealId }} />
       </Container>
     </main>
   );
