@@ -1,3 +1,8 @@
+interface IMealField {
+  id: number;
+  fieldName: string;
+}
+
 export interface IMealOption {
   id: string;
   name: string;
@@ -5,4 +10,5 @@ export interface IMealOption {
   defaultChecked?: boolean;
   title: string;
   img: string;
+  inputFields: IMealField[];
 }

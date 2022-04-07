@@ -11,6 +11,10 @@ export const mealOptions: IMealOption[] = [
     defaultChecked: true,
     title: "Pizza",
     img: pizzaIcon,
+    inputFields: [
+      { id: 0, fieldName: "no_of_slices" },
+      { id: 1, fieldName: "diameter" },
+    ],
   },
   {
     id: "soup",
@@ -18,6 +22,7 @@ export const mealOptions: IMealOption[] = [
     type: "radio",
     title: "Soup",
     img: soupIcon,
+    inputFields: [{ id: 0, fieldName: "spiciness_scale" }],
   },
   {
     id: "sandwich",
@@ -25,5 +30,6 @@ export const mealOptions: IMealOption[] = [
     type: "radio",
     title: "Sandwich",
     img: sandwichIcon,
+    inputFields: [{ id: 0, fieldName: "slices_of_bread" }],
   },
 ];
