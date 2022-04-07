@@ -5,4 +5,11 @@
 
 body {
   font-family: "Roboto";
+  color: $midDark;
+  height: 100vh;
+  background: $lightGray;
+}
+
+#root {
+  height: 100%;
 }
