@@ -1,8 +1,7 @@
-#radios {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  label {
+@import "./../../../../shared/assets/styles/variables";
+
+.meal-types {
+  &__item {
     cursor: pointer;
     position: relative;
     margin-left: 15px;
@@ -15,17 +14,14 @@
       padding: 8px;
       transition: ease 0.4s;
       -webkit-transition: ease 0.4s;
-      border-color: #76bc21;
+      border-color: $lightGreen;
     }
     input[type="radio"]:checked + div {
-      background-color: #f8fafb;
-      border: 1px solid #76bc21;
+      background-color: $lightGray;
+      border: 1px solid $lightGreen;
       box-shadow: 0 4px 40px 0 rgb(118 188 33 / 40%);
     }
-    .type-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    &__body {
       span {
         margin-right: 8px;
         display: flex;

@@ -6,12 +6,12 @@ import "./MealOptions.scss";
 
 const MealOptions: FC = () => {
   return (
-    <div id="radios">
+    <div className="meal-types center">
       {mealOptions?.map(({ id, name, type, defaultChecked, title, img }) => {
         return (
-          <label htmlFor={id} key={id}>
+          <label className="meal-types__item" htmlFor={id} key={id}>
             <input {...{ type, name, id, defaultChecked }} />
-            <div className="type-item">
+            <div className="meal-types__item__body center">
               <img src={img} alt={title} />
               <span>{title}</span>
             </div>
