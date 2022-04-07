@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import OrderMealPage from "./apps/meals/view/OrderMealPage";
+import OrderMealPage from "./client/apps/meals/view/OrderMealPage";
 
 import "./client/shared/assets/styles/main.scss";
 
