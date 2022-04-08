@@ -3,7 +3,7 @@ interface IMealField {
   fieldName: string;
 }
 
-export interface IMealOption {
+export interface IMeal {
   id: string;
   name: string;
   type: string;

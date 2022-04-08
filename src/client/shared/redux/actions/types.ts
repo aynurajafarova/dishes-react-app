@@ -1,0 +1,3 @@
+export const types = {
+  FETCH_SINGLE_MEAL_SUCCESS: "FETCH_SINGLE_MEAL_SUCCESS",
+};

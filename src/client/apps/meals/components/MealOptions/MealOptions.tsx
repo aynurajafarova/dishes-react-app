@@ -1,19 +1,19 @@
 import { ChangeEvent, FC } from "react";
 
-import { IMealOption } from "../../../../shared/models/meal";
+import { IMeal } from "../../../../shared/models/meal";
 
 import "./MealOptions.scss";
 
 interface IProps {
-  mealOptions: IMealOption[];
+  meals: IMeal[];
   setMealId: (id: string) => void;
 }
 
-const MealOptions: FC<IProps> = ({ mealOptions, setMealId }) => {
+const MealOptions: FC<IProps> = ({ meals, setMealId }) => {
   return (
     <>
       <div className="meal-types center">
-        {mealOptions?.map(({ id, name, type, defaultChecked, title, img }) => {
+        {meals?.map(({ id, name, type, defaultChecked, title, img }) => {
           return (
             <label className="meal-types__item" htmlFor={id} key={id}>
               <input

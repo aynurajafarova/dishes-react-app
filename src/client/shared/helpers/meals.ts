@@ -1,9 +1,9 @@
-import { IMealOption } from "../models/meal";
+import { IMeal } from "../models/meal";
 import pizzaIcon from "./../assets/images/icons/pizza-icon.svg";
 import soupIcon from "./../assets/images/icons/soup-icon.svg";
 import sandwichIcon from "./../assets/images/icons/sandwich-icon.svg";
 
-export const mealOptions: IMealOption[] = [
+export const meals: IMeal[] = [
   {
     id: "pizza",
     name: "meal",

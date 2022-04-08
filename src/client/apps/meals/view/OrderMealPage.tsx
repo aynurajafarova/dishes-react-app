@@ -1,34 +1,28 @@
 import { FC, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import OrderMealForm from "../components/OrderMealForm/OrderMealForm";
 import MealOptions from "../components/MealOptions/MealOptions";
 import Header from "../../../shared/components/Header/Header";
 import Container from "../../../shared/components/Container/Container";
-import { mealOptions } from "../../../shared/helpers/meals";
-import { IMealOption } from "../../../shared/models/meal";
+import { meals } from "../../../shared/helpers/meals";
+import { fetchSingleMeal } from "../../../shared/redux/actions/mealsAction";
 
 const OrderMealPage: FC = () => {
-  const [mealId, setMealId] = useState<string>(mealOptions[0]?.id);
+  const [mealId, setMealId] = useState<string>(meals[0]?.id);
 
-  const getSingleMeal = (mealId: string) => {
-    const newArr: IMealOption[] = mealOptions.filter(
-      (item: IMealOption) => item.id === mealId
-    );
-    console.log(newArr);
-  };
-
-  console.log(mealId);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getSingleMeal(mealId);
-  }, [mealId]);
+    dispatch(fetchSingleMeal(meals, mealId));
+  }, [dispatch, mealId]);
 
   return (
     <main>
       <Container>
         <Header className="center" title="Food order form" />
         <OrderMealForm />
-        <MealOptions {...{ mealOptions, setMealId }} />
+        <MealOptions {...{ meals, setMealId }} />
       </Container>
     </main>
   );
