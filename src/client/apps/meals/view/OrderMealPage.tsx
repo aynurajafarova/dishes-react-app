@@ -21,8 +21,8 @@ const OrderMealPage: FC = () => {
     <main>
       <Container>
         <Header className="center" title="Food order form" />
-        <OrderMealForm />
         <MealOptions {...{ meals, setMealId }} />
+        <OrderMealForm />
       </Container>
     </main>
   );

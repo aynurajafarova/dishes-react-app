@@ -1,6 +1,8 @@
-interface IMealField {
+export interface IMealField {
   id: number;
   fieldName: string;
+  label: string;
+  type: string;
 }
 
 export interface IMeal {
