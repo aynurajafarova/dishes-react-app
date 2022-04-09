@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import OrderMealForm from "../components/OrderMealForm/OrderMealForm";
-import MealOptions from "../components/MealOptions/MealOptions";
 import Header from "../../../shared/components/Header/Header";
 import Container from "../../../shared/components/Container/Container";
 import { meals } from "../../../shared/helpers/meals";
@@ -21,8 +20,7 @@ const OrderMealPage: FC = () => {
     <main>
       <Container>
         <Header className="center" title="Food order form" />
-        <MealOptions {...{ meals, setMealId }} />
-        <OrderMealForm />
+        <OrderMealForm {...{ meals, setMealId }} />
       </Container>
     </main>
   );

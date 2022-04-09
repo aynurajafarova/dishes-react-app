@@ -11,6 +11,7 @@ export interface IMeal {
   type: string;
   defaultChecked?: boolean;
   title: string;
+  value: string;
   img: string;
   inputFields: IMealField[];
 }

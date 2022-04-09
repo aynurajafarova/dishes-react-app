@@ -6,10 +6,11 @@ import sandwichIcon from "./../assets/images/icons/sandwich-icon.svg";
 export const meals: IMeal[] = [
   {
     id: "pizza",
-    name: "meal",
+    name: "type",
     type: "radio",
     defaultChecked: true,
     title: "Pizza",
+    value: "pizza",
     img: pizzaIcon,
     inputFields: [
       {
@@ -23,9 +24,10 @@ export const meals: IMeal[] = [
   },
   {
     id: "soup",
-    name: "meal",
+    name: "type",
     type: "radio",
     title: "Soup",
+    value: "soup",
     img: soupIcon,
     inputFields: [
       {
@@ -38,9 +40,10 @@ export const meals: IMeal[] = [
   },
   {
     id: "sandwich",
-    name: "meal",
+    name: "type",
     type: "radio",
     title: "Sandwich",
+    value: "sandwich",
     img: sandwichIcon,
     inputFields: [
       {
