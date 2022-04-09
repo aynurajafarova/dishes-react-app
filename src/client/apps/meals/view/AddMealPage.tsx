@@ -6,7 +6,7 @@ import Container from "../../../shared/components/Container/Container";
 import { meals } from "../../../shared/helpers/meals";
 import { fetchSingleMeal } from "../../../shared/redux/actions/mealsAction";
 
-const OrderMealPage: FC = () => {
+const AddMealPage: FC = () => {
   return (
     <main>
       <Container>
@@ -17,4 +17,4 @@ const OrderMealPage: FC = () => {
   );
 };
 
-export default OrderMealPage;
+export default AddMealPage;

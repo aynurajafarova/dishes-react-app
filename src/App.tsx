@@ -1,11 +1,11 @@
 import { FC } from "react";
 
-import OrderMealPage from "./client/apps/meals/view/OrderMealPage";
+import AddMealPage from "./client/apps/meals/view/AddMealPage";
 
 import "./client/shared/assets/styles/main.scss";
 
 const App: FC = () => {
-  return <OrderMealPage />;
+  return <AddMealPage />;
 };
 
 export default App;
