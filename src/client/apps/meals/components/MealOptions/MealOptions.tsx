@@ -1,30 +1,34 @@
-import { ChangeEvent, FC } from "react";
+import { FC } from "react";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
 import { Field } from "redux-form";
 
 import { IMeal } from "../../../../shared/models/meal";
+import { fetchSingleMeal } from "../../../../shared/redux/actions/mealsAction";
 
 import "./MealOptions.scss";
 
 interface IProps {
   meals: IMeal[];
-  setMealId: (id: string) => void;
   reset: () => void;
+  fetchSingleMeal: (meals: IMeal[], id: string) => (dispatch: Dispatch) => void;
 }
 
-const MealOptions: FC<IProps> = ({ meals, setMealId, reset }) => {
+const MealOptions: FC<IProps> = ({ meals, reset }) => {
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="meal-types center">
-        {meals?.map(({ id, name, type, defaultChecked, title, img, value }) => {
+        {meals?.map(({ id, name, type, title, img, value }) => {
           return (
             <label className="meal-types__item" htmlFor={id} key={id}>
               <Field
                 component="input"
-                checked={defaultChecked}
                 {...{ type, name, id, value }}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  setMealId(e.target.id);
+                onChange={() => {
                   reset();
+                  dispatch(fetchSingleMeal(meals, id));
                 }}
               />
               <div className="meal-types__item__body center">

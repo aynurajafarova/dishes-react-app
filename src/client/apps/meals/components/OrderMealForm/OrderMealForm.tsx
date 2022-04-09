@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { useSelector } from "react-redux";
+import { Dispatch } from "redux";
 
 import { RootState } from "../../../../shared/redux/reducers";
 import { IMeal, IMealField } from "../../../../shared/models/meal";
@@ -8,7 +9,7 @@ import MealOptions from "../MealOptions/MealOptions";
 
 interface IProps {
   meals: IMeal[];
-  setMealId: (id: string) => void;
+  fetchSingleMeal: (meals: IMeal[], id: string) => (dispatch: Dispatch) => void;
 }
 
 const OrderMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
@@ -18,13 +19,13 @@ const OrderMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
   valid,
   meals,
   reset,
-  setMealId,
+  fetchSingleMeal,
 }) => {
   const { singleMeal } = useSelector((state: RootState) => state.meals);
 
   return (
     <form onSubmit={handleSubmit((val: any) => console.log(val))}>
-      <MealOptions {...{ meals, setMealId, reset }} />
+      <MealOptions {...{ meals, reset, fetchSingleMeal }} />
       {singleMeal?.inputFields.map(
         ({ id, fieldName, label, type }: IMealField) => {
           return (
