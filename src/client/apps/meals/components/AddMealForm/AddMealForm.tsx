@@ -12,7 +12,7 @@ interface IProps {
   fetchSingleMeal: (meals: IMeal[], id: string) => (dispatch: Dispatch) => void;
 }
 
-const OrderMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
+const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
   handleSubmit,
   pristine,
   submitting,
@@ -51,4 +51,4 @@ const OrderMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
 
 export default reduxForm<any, IProps>({
   form: "orderMealForm",
-})(OrderMealForm);
+})(AddMealForm);

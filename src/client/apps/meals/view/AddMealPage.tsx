@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import OrderMealForm from "../components/OrderMealForm/OrderMealForm";
+import AddMealForm from "../components/AddMealForm/AddMealForm";
 import Header from "../../../shared/components/Header/Header";
 import Container from "../../../shared/components/Container/Container";
 import { meals } from "../../../shared/helpers/meals";
@@ -11,7 +11,7 @@ const AddMealPage: FC = () => {
     <main>
       <Container>
         <Header className="center" title="Food order form" />
-        <OrderMealForm {...{ meals, fetchSingleMeal }} />
+        <AddMealForm {...{ meals, fetchSingleMeal }} />
       </Container>
     </main>
   );
