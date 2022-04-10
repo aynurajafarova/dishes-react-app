@@ -18,14 +18,57 @@ interface IProps {
   fetchSingleMeal: (meals: IMeal[], id: string) => (dispatch: Dispatch) => void;
   commonInputFields: IField[];
 }
+const validate = (values: any) => {
+  const errors = {
+    name: "",
+    type: "",
+    no_of_slices: "",
+    diameter: "",
+    spiciness_scale: "",
+    slices_of_bread: "",
+  };
+  const inputFields = [
+    "name",
+    "type",
+    "no_of_slices",
+    "diameter",
+    "spiciness_scale",
+    "slices_of_bread",
+  ];
+  inputFields.forEach((field: string) => {
+    if (!values[field]) {
+      errors[field] = "Required";
+    }
+  });
+
+  if (
+    parseInt(values.spiciness_scale) === 0 ||
+    parseInt(values.spiciness_scale) > 10
+  ) {
+    errors.spiciness_scale = "The spiciness scale should be between 1-10";
+  }
+
+  return errors;
+};
+
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
+  <div>
+    <label>{label}</label>
+    <div>
+      <input {...input} placeholder={label} type={type} />
+      {touched && error && <span>{error}</span>}
+    </div>
+  </div>
+);
 
 const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
   handleSubmit,
-  pristine,
   submitting,
-  valid,
   meals,
+  invalid,
   reset,
+  error,
+  anyTouched,
   fetchSingleMeal,
   commonInputFields,
 }) => {
@@ -56,14 +99,15 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
             <Field
               name={fieldName}
               type={type}
-              component="input"
+              component={renderField}
               id={fieldName}
               placeholder={fieldName}
             />
+            {anyTouched && error && <span>{error}</span>}
           </div>
         );
       })}
-      <MealOptions {...{ meals, reset, fetchSingleMeal }} />
+      <MealOptions {...{ meals, reset, fetchSingleMeal, renderField }} />
       {singleMeal?.inputFields.map(({ id, fieldName, label, type }: IField) => {
         return (
           <div key={id}>
@@ -71,14 +115,14 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
             <Field
               name={fieldName}
               type={type}
-              component="input"
+              component={renderField}
               id={fieldName}
               placeholder={fieldName}
             />
           </div>
         );
       })}
-      <button type="submit" disabled={!valid || pristine || submitting}>
+      <button type="submit" disabled={invalid || submitting}>
         Submit
       </button>
     </form>
@@ -87,4 +131,5 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
 
 export default reduxForm<any, IProps>({
   form: EFormName.ADD_MEAL_FORM,
+  validate,
 })(AddMealForm);

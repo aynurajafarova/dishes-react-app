@@ -67,7 +67,7 @@ export const commonInputFields: IField[] = [
     id: 1,
     fieldName: "preparation_time",
     label: "Preparation time",
-    type: "string",
+    type: "time",
   },
 ];
 
