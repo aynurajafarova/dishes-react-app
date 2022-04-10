@@ -18,8 +18,6 @@ const AddMealPage: FC = () => {
     (state: RootState) => state.meals
   );
 
-  console.log(Boolean(createdMeal));
-
   return (
     <>
       {loading ? (

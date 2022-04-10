@@ -1,8 +1,8 @@
-import { postNewMeal } from "./../../../apps/meals/api/index";
 import { Dispatch } from "redux";
 
 import { types } from "./types";
-import { IMeal } from "./../../models/meal";
+import { IMeal, IMealData } from "./../../models/meal";
+import { postNewMeal } from "./../../../apps/meals/api/index";
 
 export const fetchSingleMeal =
   (meals: IMeal[], id: string) => (dispatch: Dispatch) => {
@@ -14,12 +14,11 @@ export const fetchSingleMeal =
     });
   };
 
-export const postAddNewMeal = (data: any) => (dispatch: Dispatch) => {
+export const postAddNewMeal = (data: IMealData) => (dispatch: Dispatch) => {
   dispatch({ type: types.POST_NEW_MEAL_PENDING });
 
   const res: any = postNewMeal(data)
     .then((response: any) => {
-      console.log(response);
       dispatch({
         type: types.POST_NEW_MEAL_SUCCESS,
         payload: response?.data,
@@ -35,7 +34,6 @@ export const postAddNewMeal = (data: any) => (dispatch: Dispatch) => {
 };
 
 export const closeModal = () => (dispatch: Dispatch) => {
-  console.log("test");
   dispatch({
     type: types.CLOSE_MODAL,
   });

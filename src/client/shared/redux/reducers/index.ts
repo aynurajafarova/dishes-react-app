@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
-import { IMeal, IMealData } from "../../models/meal";
 
+import { IMeal, IMealData } from "../../models/meal";
 import mealsReducer from "./mealsReducer";
 
 export type RootState = {

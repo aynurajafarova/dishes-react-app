@@ -1,4 +1,5 @@
 import { Action } from "redux";
+
 import { types } from "../actions/types";
 import { IMeal, IMealData } from "../../models/meal";
 

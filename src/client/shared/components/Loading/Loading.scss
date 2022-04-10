@@ -1,3 +1,5 @@
+@import "./../../assets/styles/variables";
+
 .loading {
   height: 100%;
 }
@@ -13,8 +15,8 @@
   height: 64px;
   margin: 8px;
   border-radius: 50%;
-  border: 6px solid #76bc21;
-  border-color: #76bc21 transparent #76bc21 transparent;
+  border: 6px solid $lightGreen;
+  border-color: $lightGreen transparent $lightGreen transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {

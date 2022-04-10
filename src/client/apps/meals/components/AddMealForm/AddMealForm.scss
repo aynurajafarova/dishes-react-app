@@ -1,3 +1,5 @@
+@import "./../../../../shared/assets/styles/variables";
+
 .add-meal-form {
   width: 50%;
   margin: 0 auto;
@@ -33,7 +35,7 @@
   }
   &__btn {
     button {
-      background-color: #76bc21;
+      background-color: $lightGreen;
       color: white;
       padding: 15px 60px;
       font-size: 18px;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC } from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { useSelector, useDispatch } from "react-redux";
