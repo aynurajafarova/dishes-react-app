@@ -7,6 +7,7 @@ import mealsReducer from "./mealsReducer";
 export type RootState = {
   meals: {
     singleMeal: IMeal;
+    loading: boolean;
   };
   form: { addMealForm: any };
 };
