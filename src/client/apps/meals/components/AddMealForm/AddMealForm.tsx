@@ -4,12 +4,19 @@ import { useSelector } from "react-redux";
 import { Dispatch } from "redux";
 
 import { RootState } from "../../../../shared/redux/reducers";
-import { IMeal, IMealField } from "../../../../shared/models/meal";
+import {
+  IMeal,
+  IField,
+  IRegisteredFieldItem,
+} from "../../../../shared/models/meal";
 import MealOptions from "../MealOptions/MealOptions";
+import { EFormName } from "../../../../shared/consts/enum";
+import { findObj } from "../../../../shared/helpers/meals";
 
 interface IProps {
   meals: IMeal[];
   fetchSingleMeal: (meals: IMeal[], id: string) => (dispatch: Dispatch) => void;
+  commonInputFields: IField[];
 }
 
 const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
@@ -20,28 +27,57 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
   meals,
   reset,
   fetchSingleMeal,
+  commonInputFields,
 }) => {
   const { singleMeal } = useSelector((state: RootState) => state.meals);
+  const { addMealForm } = useSelector((state: RootState) => state.form);
+
+  const addMeal = () => {
+    const registeredFields: object = addMealForm?.registeredFields;
+
+    const registeredFieldsNames = Object.values(registeredFields).map(
+      ({ name }: IRegisteredFieldItem) => name
+    );
+
+    const registeredValues = Object.getOwnPropertyNames(
+      addMealForm?.values
+    ).filter((value) => registeredFieldsNames.includes(value));
+
+    const data = findObj(registeredValues, addMealForm?.values);
+    console.log(data);
+  };
 
   return (
-    <form onSubmit={handleSubmit((val: any) => console.log(val))}>
+    <form onSubmit={handleSubmit(addMeal)}>
+      {commonInputFields?.map(({ id, fieldName, label, type }: IField) => {
+        return (
+          <div key={id}>
+            <label htmlFor={fieldName}>{label}:</label>
+            <Field
+              name={fieldName}
+              type={type}
+              component="input"
+              id={fieldName}
+              placeholder={fieldName}
+            />
+          </div>
+        );
+      })}
       <MealOptions {...{ meals, reset, fetchSingleMeal }} />
-      {singleMeal?.inputFields.map(
-        ({ id, fieldName, label, type }: IMealField) => {
-          return (
-            <div key={id}>
-              <label htmlFor={fieldName}>{label}:</label>
-              <Field
-                name={fieldName}
-                type={type}
-                component="input"
-                id={fieldName}
-                placeholder={fieldName}
-              />
-            </div>
-          );
-        }
-      )}
+      {singleMeal?.inputFields.map(({ id, fieldName, label, type }: IField) => {
+        return (
+          <div key={id}>
+            <label htmlFor={fieldName}>{label}:</label>
+            <Field
+              name={fieldName}
+              type={type}
+              component="input"
+              id={fieldName}
+              placeholder={fieldName}
+            />
+          </div>
+        );
+      })}
       <button type="submit" disabled={!valid || pristine || submitting}>
         Submit
       </button>
@@ -50,5 +86,5 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
 };
 
 export default reduxForm<any, IProps>({
-  form: "orderMealForm",
+  form: EFormName.ADD_MEAL_FORM,
 })(AddMealForm);

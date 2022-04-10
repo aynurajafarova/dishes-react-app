@@ -8,6 +8,7 @@ export type RootState = {
   meals: {
     singleMeal: IMeal;
   };
+  form: { addMealForm: any };
 };
 
 const rootReducer = combineReducers({

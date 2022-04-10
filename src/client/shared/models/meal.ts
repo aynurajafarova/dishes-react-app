@@ -1,4 +1,4 @@
-export interface IMealField {
+export interface IField {
   id: number;
   fieldName: string;
   label: string;
@@ -13,5 +13,11 @@ export interface IMeal {
   title: string;
   value: string;
   img: string;
-  inputFields: IMealField[];
+  inputFields: IField[];
+}
+
+export interface IRegisteredFieldItem {
+  name: string;
+  type: string;
+  count: number;
 }

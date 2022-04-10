@@ -14,7 +14,7 @@ interface IProps {
   fetchSingleMeal: (meals: IMeal[], id: string) => (dispatch: Dispatch) => void;
 }
 
-const MealOptions: FC<IProps> = ({ meals, reset }) => {
+const MealOptions: FC<IProps> = ({ meals }) => {
   const dispatch = useDispatch();
 
   return (
@@ -27,7 +27,7 @@ const MealOptions: FC<IProps> = ({ meals, reset }) => {
                 component="input"
                 {...{ type, name, id, value }}
                 onChange={() => {
-                  reset();
+                  // reset();
                   dispatch(fetchSingleMeal(meals, id));
                 }}
               />

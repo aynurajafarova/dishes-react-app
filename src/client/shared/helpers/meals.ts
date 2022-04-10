@@ -1,4 +1,4 @@
-import { IMeal } from "../models/meal";
+import { IMeal, IField } from "../models/meal";
 import pizzaIcon from "./../assets/images/icons/pizza-icon.svg";
 import soupIcon from "./../assets/images/icons/soup-icon.svg";
 import sandwichIcon from "./../assets/images/icons/sandwich-icon.svg";
@@ -55,3 +55,43 @@ export const meals: IMeal[] = [
     ],
   },
 ];
+
+export const commonInputFields: IField[] = [
+  {
+    id: 0,
+    fieldName: "name",
+    label: "Meal name",
+    type: "string",
+  },
+  {
+    id: 1,
+    fieldName: "preparation_time",
+    label: "Preparation time",
+    type: "string",
+  },
+];
+
+export const findObj = (arr: any, obj: object) => {
+  let arrOfKeys: any[] = [];
+  const newObj = {};
+
+  arr.filter(() => {
+    Object.keys(obj).filter((key) => {
+      arr.includes(key) && arrOfKeys.push(key);
+    });
+  });
+
+  arrOfKeys = arrOfKeys.filter(
+    (item, index) => arrOfKeys.indexOf(item) != index
+  );
+
+  arrOfKeys.filter((item) => {
+    for (const [key, value] of Object.entries(obj)) {
+      if (item == key) {
+        newObj[key] = value;
+      }
+    }
+  });
+
+  return newObj;
+};
