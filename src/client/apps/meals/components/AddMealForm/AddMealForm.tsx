@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 
 import { RootState } from "../../../../shared/redux/reducers";
@@ -12,12 +12,14 @@ import {
 import MealOptions from "../MealOptions/MealOptions";
 import { EFormName } from "../../../../shared/consts/enum";
 import { findObj } from "../../../../shared/helpers/meals";
+import { postAddNewMeal } from "../../../../shared/redux/actions/mealsAction";
 
 interface IProps {
   meals: IMeal[];
   fetchSingleMeal: (meals: IMeal[], id: string) => (dispatch: Dispatch) => void;
   commonInputFields: IField[];
 }
+
 const validate = (values: any) => {
   const errors = {
     name: "",
@@ -27,6 +29,7 @@ const validate = (values: any) => {
     spiciness_scale: "",
     slices_of_bread: "",
   };
+
   const inputFields = [
     "name",
     "type",
@@ -35,6 +38,7 @@ const validate = (values: any) => {
     "spiciness_scale",
     "slices_of_bread",
   ];
+
   inputFields.forEach((field: string) => {
     if (!values[field]) {
       errors[field] = "Required";
@@ -51,11 +55,24 @@ const validate = (values: any) => {
   return errors;
 };
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error },
+  step,
+  minValue,
+}) => (
   <div>
     <label>{label}</label>
     <div>
-      <input {...input} placeholder={label} type={type} />
+      <input
+        {...input}
+        placeholder={label}
+        type={type}
+        step={step}
+        min={minValue}
+      />
       {touched && error && <span>{error}</span>}
     </div>
   </div>
@@ -75,6 +92,8 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
   const { singleMeal } = useSelector((state: RootState) => state.meals);
   const { addMealForm } = useSelector((state: RootState) => state.form);
 
+  const dispatch = useDispatch();
+
   const addMeal = () => {
     const registeredFields: object = addMealForm?.registeredFields;
 
@@ -87,43 +106,55 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
     ).filter((value) => registeredFieldsNames.includes(value));
 
     const data = findObj(registeredValues, addMealForm?.values);
-    console.log(data);
-  };
 
+    singleMeal?.inputFields.map(({ type, fieldName }: IField) => {
+      if (type === "number")
+        return (data[fieldName] = parseInt(data[fieldName]));
+    });
+
+    dispatch(postAddNewMeal(data));
+  };
   return (
     <form onSubmit={handleSubmit(addMeal)}>
-      {commonInputFields?.map(({ id, fieldName, label, type }: IField) => {
-        return (
-          <div key={id}>
-            <label htmlFor={fieldName}>{label}:</label>
-            <Field
-              name={fieldName}
-              type={type}
-              component={renderField}
-              id={fieldName}
-              placeholder={fieldName}
-            />
-            {anyTouched && error && <span>{error}</span>}
-          </div>
-        );
-      })}
+      {commonInputFields?.map(
+        ({ id, fieldName, label, type, step }: IField) => {
+          return (
+            <div key={id}>
+              <label htmlFor={fieldName}>{label}:</label>
+              <Field
+                name={fieldName}
+                type={type}
+                component={renderField}
+                id={fieldName}
+                placeholder={fieldName}
+                step={step}
+              />
+              {anyTouched && error && <span>{error}</span>}
+            </div>
+          );
+        }
+      )}
       <MealOptions {...{ meals, reset, fetchSingleMeal, renderField }} />
-      {singleMeal?.inputFields.map(({ id, fieldName, label, type }: IField) => {
-        return (
-          <div key={id}>
-            <label htmlFor={fieldName}>{label}:</label>
-            <Field
-              name={fieldName}
-              type={type}
-              component={renderField}
-              id={fieldName}
-              placeholder={fieldName}
-            />
-          </div>
-        );
-      })}
+      {singleMeal &&
+        singleMeal?.inputFields.map(
+          ({ id, fieldName, label, type, minValue }: IField) => {
+            return (
+              <div key={id}>
+                <label htmlFor={fieldName}>{label}:</label>
+                <Field
+                  name={fieldName}
+                  type={type}
+                  component={renderField}
+                  id={fieldName}
+                  placeholder={fieldName}
+                  minValue={minValue}
+                />
+              </div>
+            );
+          }
+        )}
       <button type="submit" disabled={invalid || submitting}>
-        Submit
+        Add
       </button>
     </form>
   );

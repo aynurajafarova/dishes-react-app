@@ -18,8 +18,15 @@ export const meals: IMeal[] = [
         fieldName: "no_of_slices",
         label: "Number of slices",
         type: "number",
+        minValue: "0",
       },
-      { id: 1, fieldName: "diameter", label: "Diameter", type: "number" },
+      {
+        id: 1,
+        fieldName: "diameter",
+        label: "Diameter",
+        type: "number",
+        minValue: "0",
+      },
     ],
   },
   {
@@ -35,6 +42,7 @@ export const meals: IMeal[] = [
         fieldName: "spiciness_scale",
         label: "Spiciness scale",
         type: "number",
+        minValue: "0",
       },
     ],
   },
@@ -51,6 +59,7 @@ export const meals: IMeal[] = [
         fieldName: "slices_of_bread",
         label: "Slices of bread",
         type: "number",
+        minValue: "0",
       },
     ],
   },
@@ -68,6 +77,7 @@ export const commonInputFields: IField[] = [
     fieldName: "preparation_time",
     label: "Preparation time",
     type: "time",
+    step: "2",
   },
 ];
 

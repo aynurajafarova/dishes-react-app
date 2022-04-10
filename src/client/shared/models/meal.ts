@@ -3,10 +3,12 @@ export interface IField {
   fieldName: string;
   label: string;
   type: string;
+  step?: string;
+  minValue?: string;
 }
 
 export interface IMeal {
-  id: string;
+  id: string | number;
   name: string;
   type: string;
   defaultChecked?: boolean;

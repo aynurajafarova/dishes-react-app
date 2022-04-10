@@ -1,3 +1,4 @@
+import { postNewMeal } from "./../../../apps/meals/api/index";
 import { Dispatch } from "redux";
 
 import { types } from "./types";
@@ -12,3 +13,23 @@ export const fetchSingleMeal =
       payload: singleMeal,
     });
   };
+
+export const postAddNewMeal = (data: any) => (dispatch: Dispatch) => {
+  dispatch({ type: types.POST_NEW_MEAL_PENDING });
+
+  const res: any = postNewMeal(data)
+    .then((response: any) => {
+      console.log(response);
+      dispatch({
+        type: types.POST_NEW_MEAL_SUCCESS,
+        payload: response?.data,
+      });
+    })
+    .catch((err) =>
+      dispatch({
+        type: types.POST_NEW_MEAL_ERROR,
+        payload: err.response.data,
+      })
+    );
+  return res;
+};

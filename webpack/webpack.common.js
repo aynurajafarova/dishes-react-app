@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const { DefinePlugin } = require("webpack");
 
 module.exports = {
   entry: path.resolve(__dirname, "..", "./src/index.tsx"),
@@ -46,6 +47,13 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [{ from: "src", to: "dest" }],
+    }),
+    new DefinePlugin({
+      process: {
+        env: {
+          NODE_MODE: JSON.stringify(process.env.NODE_MODE),
+        },
+      },
     }),
   ],
 };
