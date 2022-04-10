@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
-import { IMeal } from "../../models/meal";
+import { IMeal, IMealData } from "../../models/meal";
 
 import mealsReducer from "./mealsReducer";
 
@@ -9,6 +9,7 @@ export type RootState = {
     singleMeal: IMeal;
     loading: boolean;
     openModal: boolean;
+    createdMeal: IMealData;
   };
   form: { addMealForm: any };
 };

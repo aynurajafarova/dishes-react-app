@@ -23,3 +23,13 @@ export interface IRegisteredFieldItem {
   type: string;
   count: number;
 }
+
+export interface IMealData {
+  name: string;
+  type: string;
+  preparation_time: string;
+  no_of_slices?: number;
+  diameter?: number;
+  spiciness_scale?: number;
+  slices_of_bread?: number;
+}

@@ -14,7 +14,9 @@ import Loading from "../../../shared/components/Loading/Loading";
 import Modal from "../../../shared/components/Modal/Modal";
 
 const AddMealPage: FC = () => {
-  const { loading } = useSelector((state: RootState) => state.meals);
+  const { loading, openModal, createdMeal } = useSelector(
+    (state: RootState) => state.meals
+  );
 
   return (
     <>
@@ -28,11 +30,13 @@ const AddMealPage: FC = () => {
           </main>
         </Container>
       )}
-      <Modal
-        {...{ closeModal }}
-        heading="Success"
-        title="Created Successfully!"
-      />
+      {openModal && (
+        <Modal
+          {...{ closeModal, createdMeal }}
+          heading="Success"
+          title="Created Successfully!"
+        />
+      )}
     </>
   );
 };

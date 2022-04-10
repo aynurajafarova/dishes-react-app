@@ -1,11 +1,11 @@
 import { Action } from "redux";
 import { types } from "../actions/types";
-import { IMeal } from "../../models/meal";
+import { IMeal, IMealData } from "../../models/meal";
 
 interface IMealsState {
   singleMeal: IMeal;
   loading: boolean;
-  createdMeal: IMeal;
+  createdMeal: IMealData;
   error: any;
   openModal: boolean;
 }
