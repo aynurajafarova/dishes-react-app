@@ -27,7 +27,7 @@ const AddMealPage: FC = () => {
       ) : (
         <Container>
           <main>
-            <Header className="center" title="Food order form" />
+            <Header className="center" title="Create new meal" />
             <AddMealForm {...{ meals, fetchSingleMeal, commonInputFields }} />
           </main>
         </Container>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC } from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,7 +23,7 @@ interface IProps {
   commonInputFields: IField[];
 }
 
-const validate = (values: any) => {
+const validate = (values: object) => {
   const errors = {
     name: "",
     type: "",
@@ -171,13 +172,9 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
             );
           }
         )}
-      <div className="add-meal-form__field">
-        <button
-          className=" add-meal-form__btn"
-          type="submit"
-          disabled={invalid || submitting}
-        >
-          Add
+      <div className="add-meal-form__field add-meal-form__btn">
+        <button type="submit" disabled={invalid || submitting}>
+          Create
         </button>
       </div>
     </form>

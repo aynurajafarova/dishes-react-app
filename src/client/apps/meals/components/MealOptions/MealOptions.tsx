@@ -19,7 +19,7 @@ const MealOptions: FC<IProps> = ({ meals, fetchSingleMeal, className }) => {
     <>
       <div className={`meal-types ${className}`}>
         <p>Select meal type:</p>
-        <div className="center">
+        <div className="meal-types__list center">
           {meals &&
             meals?.map(({ id, name, type, title, img, value }) => {
               return (
