@@ -1,7 +1,10 @@
 import { FC } from "react";
 import { useDispatch } from "react-redux";
 
-import { removeOrAddCharacters } from "../../helpers/format";
+import {
+  removeOrAddCharacters,
+  capitalizeFirstLetter,
+} from "../../helpers/format";
 import { IMealData } from "../../models/meal";
 
 import "./Modal.scss";
@@ -39,7 +42,13 @@ const Modal: FC<IProps> = ({ heading, title, closeModal, createdMeal }) => {
                   return (
                     <>
                       <p className="modal-content__desc">
-                        <span>{removeOrAddCharacters(meal[0], " ")}: </span>
+                        <span>
+                          {meal[0] &&
+                            capitalizeFirstLetter(
+                              removeOrAddCharacters(meal[0], " ")
+                            )}
+                          :
+                        </span>
                         <span>{meal[1]}</span>
                       </p>
                     </>
