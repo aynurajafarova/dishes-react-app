@@ -1,0 +1,62 @@
+@import "./../../../../shared/assets/styles/variables";
+
+.meal-types {
+  margin: 20px 0px;
+  &__item {
+    cursor: pointer;
+    position: relative;
+    width: 140px;
+    input[type="radio"] {
+      opacity: 0;
+      position: absolute;
+    }
+    input[type="radio"] + div {
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
+      padding: 8px;
+      transition: ease 0.4s;
+      -webkit-transition: ease 0.4s;
+      border-color: $lightGreen;
+    }
+    input[type="radio"]:checked + div {
+      background-color: $lightGray;
+      border-bottom: 2px solid $lightGreen;
+      box-shadow: 0 4px 40px 0 rgb(118 188 33 / 40%);
+      span {
+        color: $midDark;
+      }
+    }
+    &__body {
+      span {
+        margin-right: 8px;
+        display: flex;
+        color: $midGray;
+      }
+    }
+  }
+  p {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .meal-types {
+    overflow: auto;
+    &__item {
+      width: 120px;
+      input[type="radio"] + div {
+        padding: 5px;
+      }
+      &__body {
+        img {
+          width: 30px;
+        }
+        span {
+          margin-right: 0px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
