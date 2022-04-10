@@ -10,6 +10,7 @@ export type RootState = {
     loading: boolean;
     openModal: boolean;
     createdMeal: IMealData;
+    error: object;
   };
   form: { addMealForm: any };
 };

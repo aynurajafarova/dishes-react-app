@@ -13,10 +13,10 @@ interface IProps {
   heading: string;
   title?: string;
   closeModal: () => void;
-  createdMeal: IMealData;
+  content: IMealData | object;
 }
 
-const Modal: FC<IProps> = ({ heading, title, closeModal, createdMeal }) => {
+const Modal: FC<IProps> = ({ heading, title, closeModal, content }) => {
   const dispatch = useDispatch();
 
   return (
@@ -38,18 +38,18 @@ const Modal: FC<IProps> = ({ heading, title, closeModal, createdMeal }) => {
             <div className="modal-content">
               <p className="modal-content__title">{title}</p>
               <div className="modal-content__body">
-                {Object.entries(createdMeal).map((meal) => {
+                {Object.entries(content).map((data) => {
                   return (
                     <>
                       <p className="modal-content__desc">
                         <span>
-                          {meal[0] &&
+                          {data[0] &&
                             capitalizeFirstLetter(
-                              removeOrAddCharacters(meal[0], " ")
+                              removeOrAddCharacters(data[0], " ")
                             )}
                           :
                         </span>
-                        <span>{meal[1]}</span>
+                        <span>{data[1]}</span>
                       </p>
                     </>
                   );

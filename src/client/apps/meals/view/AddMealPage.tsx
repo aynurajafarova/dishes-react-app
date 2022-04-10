@@ -14,9 +14,11 @@ import Loading from "../../../shared/components/Loading/Loading";
 import Modal from "../../../shared/components/Modal/Modal";
 
 const AddMealPage: FC = () => {
-  const { loading, openModal, createdMeal } = useSelector(
+  const { loading, openModal, createdMeal, error } = useSelector(
     (state: RootState) => state.meals
   );
+
+  console.log(Boolean(createdMeal));
 
   return (
     <>
@@ -32,9 +34,18 @@ const AddMealPage: FC = () => {
       )}
       {openModal && (
         <Modal
-          {...{ closeModal, createdMeal }}
-          heading="Success"
-          title="Created Successfully!"
+          {...{ closeModal }}
+          content={
+            Object.getOwnPropertyNames(createdMeal).length ? createdMeal : error
+          }
+          heading={
+            Object.getOwnPropertyNames(createdMeal).length ? "Success" : "Error"
+          }
+          title={
+            Object.getOwnPropertyNames(createdMeal).length
+              ? "Created Successfully!"
+              : "Oops! Error"
+          }
         />
       )}
     </>

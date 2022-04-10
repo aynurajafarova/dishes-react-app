@@ -6,14 +6,14 @@ interface IMealsState {
   singleMeal: IMeal;
   loading: boolean;
   createdMeal: IMealData;
-  error: any;
+  error: object;
   openModal: boolean;
 }
 
 const initialState: IMealsState = {
   loading: false,
   createdMeal: {},
-  error: null,
+  error: {},
   openModal: false,
 } as IMealsState;
 
