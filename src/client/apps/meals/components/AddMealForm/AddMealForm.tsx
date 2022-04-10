@@ -87,7 +87,6 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
   submitting,
   meals,
   invalid,
-  reset,
   error,
   anyTouched,
   fetchSingleMeal,
@@ -144,7 +143,10 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
           );
         }
       )}
-      <MealOptions {...{ meals, reset, fetchSingleMeal, renderField }} />
+      <MealOptions
+        className="add-meal-form__field"
+        {...{ meals, fetchSingleMeal, renderField }}
+      />
       {singleMeal &&
         singleMeal?.inputFields.map(
           ({ id, fieldName, label, type, minValue }: IField) => {
