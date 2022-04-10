@@ -33,3 +33,10 @@ export const postAddNewMeal = (data: any) => (dispatch: Dispatch) => {
     );
   return res;
 };
+
+export const closeModal = () => (dispatch: Dispatch) => {
+  console.log("test");
+  dispatch({
+    type: types.CLOSE_MODAL,
+  });
+};

@@ -8,6 +8,7 @@ export type RootState = {
   meals: {
     singleMeal: IMeal;
     loading: boolean;
+    openModal: boolean;
   };
   form: { addMealForm: any };
 };

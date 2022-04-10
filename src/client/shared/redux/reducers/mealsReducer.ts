@@ -7,12 +7,14 @@ interface IMealsState {
   loading: boolean;
   createdMeal: IMeal;
   error: any;
+  openModal: boolean;
 }
 
 const initialState: IMealsState = {
   loading: false,
   createdMeal: {},
   error: null,
+  openModal: false,
 } as IMealsState;
 
 interface IFetchSingleMealAction extends Action {
@@ -29,18 +31,21 @@ const mealsReducer = (state = initialState, { type, payload }: MealActions) => {
         singleMeal: payload,
         loading: false,
         createdMeal: {},
+        openModal: false,
       };
     case types.POST_NEW_MEAL_PENDING:
       return {
         ...state,
         loading: true,
         createdMeal: {},
+        openModal: false,
       };
     case types.POST_NEW_MEAL_SUCCESS:
       return {
         ...state,
         loading: false,
         createdMeal: payload,
+        openModal: true,
       };
     case types.POST_NEW_MEAL_ERROR:
       return {
@@ -48,6 +53,12 @@ const mealsReducer = (state = initialState, { type, payload }: MealActions) => {
         loading: false,
         createdMeal: {},
         error: payload,
+        openModal: true,
+      };
+    case types.CLOSE_MODAL:
+      return {
+        ...state,
+        openModal: false,
       };
     default:
       return state;

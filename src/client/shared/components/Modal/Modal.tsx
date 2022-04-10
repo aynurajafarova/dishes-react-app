@@ -1,13 +1,17 @@
 import { FC } from "react";
+import { useDispatch } from "react-redux";
 
 import "./Modal.scss";
 
 interface IProps {
   heading: string;
   title?: string;
+  closeModal: () => void;
 }
 
-const Modal: FC<IProps> = ({ heading, title }) => {
+const Modal: FC<IProps> = ({ heading, title, closeModal }) => {
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="darkBG">
@@ -16,7 +20,14 @@ const Modal: FC<IProps> = ({ heading, title }) => {
             <div className="modalHeader">
               <h5 className="heading">{heading}</h5>
             </div>
-            <button className="closeBtn">X</button>
+            <button
+              onClick={() => {
+                dispatch(closeModal());
+              }}
+              className="closeBtn"
+            >
+              X
+            </button>
             <div className="modalContent">{title}</div>
           </div>
         </div>
