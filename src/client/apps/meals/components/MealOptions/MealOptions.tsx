@@ -21,13 +21,17 @@ const MealOptions: FC<IProps> = ({ meals, fetchSingleMeal }) => {
         {meals &&
           meals?.map(({ id, name, type, title, img, value }) => {
             return (
-              <label className="meal-types__item" htmlFor={id} key={id}>
+              <label
+                className="meal-types__item"
+                htmlFor={id.toString()}
+                key={id}
+              >
                 <Field
                   component="input"
                   {...{ type, name, id, value }}
                   onChange={() => {
                     // reset();
-                    dispatch(fetchSingleMeal(meals, id));
+                    dispatch(fetchSingleMeal(meals, id.toString()));
                   }}
                 />
                 <div className="meal-types__item__body center">

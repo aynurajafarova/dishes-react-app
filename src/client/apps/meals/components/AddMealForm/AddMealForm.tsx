@@ -14,6 +14,8 @@ import { EFormName } from "../../../../shared/consts/enum";
 import { findObj } from "../../../../shared/helpers/meals";
 import { postAddNewMeal } from "../../../../shared/redux/actions/mealsAction";
 
+import "./AddMealForm.scss";
+
 interface IProps {
   meals: IMeal[];
   fetchSingleMeal: (meals: IMeal[], id: string) => (dispatch: Dispatch) => void;
@@ -65,7 +67,7 @@ const renderField = ({
 }) => (
   <div>
     <label>{label}</label>
-    <div>
+    <div className="add-meal-form__field__input">
       <input
         {...input}
         placeholder={label}
@@ -73,7 +75,9 @@ const renderField = ({
         step={step}
         min={minValue}
       />
-      {touched && error && <span>{error}</span>}
+      {touched && error && (
+        <span className="add-meal-form__field__error">*{error}</span>
+      )}
     </div>
   </div>
 );
@@ -115,12 +119,17 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
     dispatch(postAddNewMeal(data));
   };
   return (
-    <form onSubmit={handleSubmit(addMeal)}>
+    <form className="add-meal-form" onSubmit={handleSubmit(addMeal)}>
       {commonInputFields?.map(
         ({ id, fieldName, label, type, step }: IField) => {
           return (
-            <div key={id}>
-              <label htmlFor={fieldName}>{label}:</label>
+            <div key={id} className="add-meal-form__field">
+              <label
+                className="add-meal-form__field__label"
+                htmlFor={fieldName}
+              >
+                {label}:
+              </label>
               <Field
                 name={fieldName}
                 type={type}
@@ -128,6 +137,7 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
                 id={fieldName}
                 placeholder={fieldName}
                 step={step}
+                className="add-meal-form__field__input"
               />
               {anyTouched && error && <span>{error}</span>}
             </div>
@@ -139,8 +149,13 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
         singleMeal?.inputFields.map(
           ({ id, fieldName, label, type, minValue }: IField) => {
             return (
-              <div key={id}>
-                <label htmlFor={fieldName}>{label}:</label>
+              <div key={id} className="add-meal-form__field">
+                <label
+                  className="add-meal-form__field__label"
+                  htmlFor={fieldName}
+                >
+                  {label}:
+                </label>
                 <Field
                   name={fieldName}
                   type={type}
@@ -148,14 +163,21 @@ const AddMealForm: FC<InjectedFormProps<any, IProps> & IProps> = ({
                   id={fieldName}
                   placeholder={fieldName}
                   minValue={minValue}
+                  className="add-meal-form__field__input"
                 />
               </div>
             );
           }
         )}
-      <button type="submit" disabled={invalid || submitting}>
-        Add
-      </button>
+      <div className="add-meal-form__field">
+        <button
+          className=" add-meal-form__btn"
+          type="submit"
+          disabled={invalid || submitting}
+        >
+          Add
+        </button>
+      </div>
     </form>
   );
 };
