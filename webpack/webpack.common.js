@@ -3,6 +3,15 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const { DefinePlugin } = require("webpack");
 
+const dotenv = require("dotenv");
+
+const env = dotenv.config().parsed;
+
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
+
 module.exports = {
   entry: path.resolve(__dirname, "..", "./src/index.tsx"),
   resolve: {
@@ -42,18 +51,12 @@ module.exports = {
     filename: "bundle.js",
   },
   plugins: [
+    new DefinePlugin(envKeys),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "..", "./src/index.html"),
     }),
     new CopyPlugin({
       patterns: [{ from: "src", to: "dest" }],
-    }),
-    new DefinePlugin({
-      process: {
-        env: {
-          NODE_MODE: JSON.stringify(process.env.NODE_MODE),
-        },
-      },
     }),
   ],
 };
